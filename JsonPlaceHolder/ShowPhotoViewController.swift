@@ -31,7 +31,7 @@ class ShowPhotoViewController: UIViewController, UICollectionViewDelegate, UICol
         let layout = UICollectionViewFlowLayout();
         
         layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0);
-        layout.minimumLineSpacing = 1;
+        layout.minimumLineSpacing = 0;
         layout.minimumInteritemSpacing = CGFloat(integerLiteral: 0);
         
         layout.itemSize = CGSize(width: self.fullScreenSize.width/4, height: self.fullScreenSize.width/4);
@@ -62,6 +62,7 @@ class ShowPhotoViewController: UIViewController, UICollectionViewDelegate, UICol
         self.photoCollectionView.frame = CGRect(x: 0, y: self.navigationBarHeight, width: self.fullScreenSize.width, height: self.fullScreenSize.height);
         
         self.view.addSubview(self.photoCollectionView);
+        
     }
     
     
@@ -78,7 +79,8 @@ class ShowPhotoViewController: UIViewController, UICollectionViewDelegate, UICol
 //        cell.imageView.backgroundColor = UIColor.red;
         cell.titleLabel.text = "\(indexPath.item + 1)"
         cell.detailLabel.text = "accusamus beatae ad facilis cum similique qui sunt";
-//        cell.backgroundColor = UIColor.red;
+        
+        cell.backgroundColor = UIColor.red;
         
         return cell;
     }

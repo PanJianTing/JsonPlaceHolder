@@ -18,11 +18,9 @@ class PhotoCollectionViewCell: UICollectionViewCell {
         super.init(frame: frame);
         
         let width = UIScreen.main.bounds.size.width;
-        let imgSize = width/4
-        let gifImage = UIImage.animatedImageNamed("frame-", duration: 1.0);
+        let imgSize = width/4;
         
         self.imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: imgSize, height: imgSize));
-        self.imageView.image = gifImage;
         
         self.titleLabel = UILabel(frame: CGRect(x: 0, y: imgSize/4, width: imgSize, height: imgSize/4));
         self.titleLabel.textAlignment = .center;
