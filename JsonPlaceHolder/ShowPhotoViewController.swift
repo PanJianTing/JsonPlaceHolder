@@ -9,12 +9,21 @@
 import UIKit
 
 class ShowPhotoViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
-    
-    
 
     var photoCollectionView : UICollectionView!
     var fullScreenSize : CGSize!
     var navigationBarHeight : CGFloat!
+    
+    var photoArray:Array<Photo>
+    
+    init(photo:Array<Photo>) {
+        self.photoArray = photo;
+        super.init(nibName: nil, bundle: nil);
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,6 +34,8 @@ class ShowPhotoViewController: UIViewController, UICollectionViewDelegate, UICol
         self.navigationBarHeight = self.navigationController?.navigationBar.frame.size.height ?? 64;
         let layout = self.setCollectionViewLayout();
         self.setCollectionView(layout: layout);
+        
+        print(self.photoArray.count);
     }
     
     private func setCollectionViewLayout() -> UICollectionViewFlowLayout{
@@ -48,12 +59,6 @@ class ShowPhotoViewController: UIViewController, UICollectionViewDelegate, UICol
         
         self.photoCollectionView.register(PhotoCollectionViewCell.self, forCellWithReuseIdentifier: "PhotoCell");
         
-//        self.photoCollectionView.register(UICollectionReusableView.self,
-//                                          forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
-//                                          withReuseIdentifier: "PhotoHeader");
-//        self.photoCollectionView.register(UICollectionReusableView.self,
-//                                          forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter,
-//                                          withReuseIdentifier: "PhotoFooter");
         
         
         self.photoCollectionView.delegate = self;
@@ -70,16 +75,23 @@ class ShowPhotoViewController: UIViewController, UICollectionViewDelegate, UICol
 
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5000;
+        return photoArray.count;
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PhotoCell", for: indexPath) as! PhotoCollectionViewCell;
         
 //        cell.imageView.backgroundColor = UIColor.red;
-        cell.titleLabel.text = "\(indexPath.item + 1)"
-        cell.detailLabel.text = "accusamus beatae ad facilis cum similique qui sunt";
+        let photo = self.photoArray[indexPath.row];
         
+        cell.titleLabel.text = "\(photo.id)"
+        cell.detailLabel.text = photo.title;
+        
+        photo.getThumbnailImage { (img) in
+            DispatchQueue.main.async {
+                cell.imageView.image = img;
+            }
+        }
         cell.backgroundColor = UIColor.red;
         
         return cell;
@@ -89,8 +101,9 @@ class ShowPhotoViewController: UIViewController, UICollectionViewDelegate, UICol
 //        let name = info[indexPath.row];
 //        print(name);
         
-        let photoDetailViewController = PhotoDetailViewController(id: indexPath.row, title: "accusamus beatae ad facilis cum similique qui sunt");
+        let photo = self.photoArray[indexPath.row];
         
+        let photoDetailViewController = PhotoDetailViewController(photo: photo);
         self.navigationController?.pushViewController(photoDetailViewController, animated: true);
     }
     

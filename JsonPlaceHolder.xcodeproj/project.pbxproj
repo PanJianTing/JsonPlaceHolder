@@ -16,6 +16,10 @@
 		558A1DB12424F19E008B6ECE /* ShowAlbumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558A1DB02424F19E008B6ECE /* ShowAlbumViewController.swift */; };
 		558A1DB324251186008B6ECE /* ShowPhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558A1DB224251186008B6ECE /* ShowPhotoViewController.swift */; };
 		558A1DB5242514E8008B6ECE /* PhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558A1DB4242514E8008B6ECE /* PhotoCollectionViewCell.swift */; };
+		558B2A462425E2E200907438 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558B2A422425E2E200907438 /* Photo.swift */; };
+		558B2A472425E2E200907438 /* PhotoFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558B2A432425E2E200907438 /* PhotoFactory.swift */; };
+		558B2A482425E2E200907438 /* UrlConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558B2A442425E2E200907438 /* UrlConnection.swift */; };
+		558B2A492425E2E200907438 /* JsonPlaceHolderAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558B2A452425E2E200907438 /* JsonPlaceHolderAPI.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +34,10 @@
 		558A1DB02424F19E008B6ECE /* ShowAlbumViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowAlbumViewController.swift; sourceTree = "<group>"; };
 		558A1DB224251186008B6ECE /* ShowPhotoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowPhotoViewController.swift; sourceTree = "<group>"; };
 		558A1DB4242514E8008B6ECE /* PhotoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCollectionViewCell.swift; sourceTree = "<group>"; };
+		558B2A422425E2E200907438 /* Photo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
+		558B2A432425E2E200907438 /* PhotoFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoFactory.swift; sourceTree = "<group>"; };
+		558B2A442425E2E200907438 /* UrlConnection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UrlConnection.swift; sourceTree = "<group>"; };
+		558B2A452425E2E200907438 /* JsonPlaceHolderAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JsonPlaceHolderAPI.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +70,8 @@
 		5578A4B72423C35C0068D292 /* JsonPlaceHolder */ = {
 			isa = PBXGroup;
 			children = (
+				558B2A4A2425E47E00907438 /* API */,
+				558B2A412425E2BA00907438 /* Model */,
 				5578A4B82423C35C0068D292 /* AppDelegate.swift */,
 				5578A4BA2423C35C0068D292 /* ViewController.swift */,
 				558A1DB02424F19E008B6ECE /* ShowAlbumViewController.swift */,
@@ -74,6 +84,24 @@
 				5578A4C42423C3650068D292 /* Info.plist */,
 			);
 			path = JsonPlaceHolder;
+			sourceTree = "<group>";
+		};
+		558B2A412425E2BA00907438 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				558B2A422425E2E200907438 /* Photo.swift */,
+				558B2A432425E2E200907438 /* PhotoFactory.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		558B2A4A2425E47E00907438 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				558B2A452425E2E200907438 /* JsonPlaceHolderAPI.swift */,
+				558B2A442425E2E200907438 /* UrlConnection.swift */,
+			);
+			path = API;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -147,12 +175,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				558B2A462425E2E200907438 /* Photo.swift in Sources */,
 				553F8B2A2425A31C0072E20A /* PhotoDetailViewController.swift in Sources */,
 				5578A4BB2423C35C0068D292 /* ViewController.swift in Sources */,
 				558A1DB5242514E8008B6ECE /* PhotoCollectionViewCell.swift in Sources */,
+				558B2A482425E2E200907438 /* UrlConnection.swift in Sources */,
 				558A1DB12424F19E008B6ECE /* ShowAlbumViewController.swift in Sources */,
 				558A1DB324251186008B6ECE /* ShowPhotoViewController.swift in Sources */,
 				5578A4B92423C35C0068D292 /* AppDelegate.swift in Sources */,
+				558B2A492425E2E200907438 /* JsonPlaceHolderAPI.swift in Sources */,
+				558B2A472425E2E200907438 /* PhotoFactory.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

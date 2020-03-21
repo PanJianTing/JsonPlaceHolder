@@ -17,12 +17,10 @@ class PhotoDetailViewController: UIViewController {
     var fullScreenSize : CGSize!
     var navigationBarHeight : CGFloat!
     
-    var id:Int;
-    var titleStr:String;
+    var photo:Photo
     
-    init(id:Int, title:String) {
-        self.id = id;
-        self.titleStr = title;
+    init(photo:Photo) {
+        self.photo = photo;
         super.init(nibName: nil, bundle: nil);
         
     }
@@ -32,7 +30,8 @@ class PhotoDetailViewController: UIViewController {
     }
     
     override func viewDidLoad() {
-        super.viewDidLoad()
+        super.viewDidLoad();
+        self.view.backgroundColor = UIColor.white;
         self.fullScreenSize = self.view.frame.size;
         self.navigationBarHeight = self.navigationController?.navigationBar.frame.size.height ?? 64;
         self.setImageView();
@@ -47,13 +46,20 @@ class PhotoDetailViewController: UIViewController {
         self.imageView = UIImageView(frame: CGRect(x: 0, y: self.navigationBarHeight, width: self.fullScreenSize.width, height: self.fullScreenSize.height/2))
         self.imageView.backgroundColor = UIColor.red;
         
+        self.photo.getImage { (img) in
+            DispatchQueue.main.async {
+                self.imageView.image = img;
+            }
+        }
+        
         self.view.addSubview(self.imageView);
     }
     
     private func setIdLabel(){
         self.idLable = UILabel(frame: CGRect(x: 20, y: self.fullScreenSize.height/2+50, width: self.fullScreenSize.width, height: 40))
 //        self.idLable.backgroundColor = UIColor.red;
-        self.idLable.text = "id : \(self.id)"
+         self.idLable.textColor = UIColor.black;
+        self.idLable.text = "id : \(self.photo.id)"
         
         self.view.addSubview(self.idLable);
     }
@@ -62,7 +68,8 @@ class PhotoDetailViewController: UIViewController {
         
         self.titleLabel = UILabel(frame: CGRect(x: 20, y: self.fullScreenSize.height/2+100, width: self.fullScreenSize.width-10, height: 100))
 //        self.titleLabel.backgroundColor = UIColor.blue;
-        self.titleLabel.text = "Title : \(self.titleStr)"
+        self.titleLabel.textColor = UIColor.black;
+        self.titleLabel.text = "Title : \(self.photo.title)"
         self.titleLabel.numberOfLines = 100;
         self.titleLabel.sizeToFit();
         

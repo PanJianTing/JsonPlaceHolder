@@ -11,23 +11,28 @@ import UIKit
 
 class ShowAlbumViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-    
-    var info = ["林書豪","陳信安","陳偉殷","王建民","陳金鋒","林智勝"]
-    
     var albumTableView : UITableView!
     var fullScreenSize : CGSize!
     var navigationBarHeight : CGFloat!
+    
+    let api:JsonPlaceHolderAPI! = JsonPlaceHolderAPI();
+    let photoFactory = PhotoFactory();
+    var photoData:Dictionary<Int, Array<Photo>>!;
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.fullScreenSize = self.view.frame.size;
         self.navigationBarHeight = self.navigationController?.navigationBar.frame.size.height ?? 64;
         self.setTableView();
-        
-        
-
-        // Do any additional setup after loading the view.
-        
+        api.getPhotos { (data) in
+            let objectArray:Array = data as! Array<Any>;
+            self.photoData = self.photoFactory.getAllPhoto(ObjectArry: objectArray);
+            DispatchQueue.main.async {
+                self.albumTableView.reloadData();
+            }
+            
+        }
     }
     
     
@@ -51,7 +56,10 @@ class ShowAlbumViewController: UIViewController, UITableViewDelegate, UITableVie
     
     // 設定tableview數量
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return info.count;
+        guard let albumData = self.photoData else {
+            return 0;
+        }
+        return albumData.keys.count + 1;
     }
     
     
@@ -59,26 +67,27 @@ class ShowAlbumViewController: UIViewController, UITableViewDelegate, UITableVie
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "AlbumCell", for: indexPath) as UITableViewCell;
-        cell.textLabel?.text = self.info[indexPath.row];
+//        let albumIndex = self.photoData[indexPath.row]?[0].albumId;
+        guard let albumIndex = self.photoData[indexPath.row]?[0].albumId else {
+            cell.textLabel?.text = "All";
+            return cell;
+        }
+        cell.textLabel?.text = "Album \(albumIndex)"
         return cell;
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true);
-        let name = info[indexPath.row];
-        print(name);
         
-        self.navigationController?.pushViewController(ShowPhotoViewController(), animated: true);
+        guard let photos:Array<Photo> = self.photoData[indexPath.row] else {
+            let nextViewController = ShowPhotoViewController(photo: self.photoFactory.getAllPhotoArray(albumDic: self.photoData));
+            self.navigationController?.pushViewController(nextViewController, animated: true);
+            return;
+        }
+        
+        let nextViewController = ShowPhotoViewController(photo: photos)
+        
+        self.navigationController?.pushViewController(nextViewController, animated: true);
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
