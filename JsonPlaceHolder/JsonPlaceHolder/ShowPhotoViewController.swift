@@ -78,7 +78,7 @@ class ShowPhotoViewController: UIViewController, UICollectionViewDelegate, UICol
 //        cell.imageView.backgroundColor = UIColor.red;
         cell.titleLabel.text = "\(indexPath.item + 1)"
         cell.detailLabel.text = "accusamus beatae ad facilis cum similique qui sunt";
-        cell.backgroundColor = UIColor.red;
+//        cell.backgroundColor = UIColor.red;
         
         return cell;
     }
