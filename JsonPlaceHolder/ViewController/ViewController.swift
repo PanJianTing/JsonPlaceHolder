@@ -21,6 +21,7 @@ class ViewController: UIViewController {
         self.navigationBarHeight = self.navigationController?.navigationBar.frame.size.height ?? 64;
         self.setButton();
         self.setLabel();
+        self.title = "Json Place Holder";
     }
     
     @objc func clickButton() {
@@ -30,7 +31,7 @@ class ViewController: UIViewController {
     
     private func setButton(){
         self.albumButton =  UIButton(frame: CGRect(x: 0, y: 0, width: 100, height: 30));
-        self.albumButton.setTitle("看相片", for: .normal)
+        self.albumButton.setTitle("相簿", for: .normal)
         self.albumButton.setTitleColor(UIColor.gray, for: .normal);
         self.albumButton.setTitleColor(UIColor.black, for: .normal);
         self.albumButton.addTarget( self, action: #selector(clickButton), for:.touchUpInside)

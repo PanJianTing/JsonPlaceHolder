@@ -21,6 +21,8 @@ class PhotoCollectionViewCell: UICollectionViewCell {
         let imgSize = width/4;
         
         self.imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: imgSize, height: imgSize));
+        self.imageView.image = UIImage(named: "default_image");
+        self.imageView.backgroundColor = UIColor.white;
         
         self.titleLabel = UILabel(frame: CGRect(x: 0, y: imgSize/4, width: imgSize, height: imgSize/4));
         self.titleLabel.textAlignment = .center;

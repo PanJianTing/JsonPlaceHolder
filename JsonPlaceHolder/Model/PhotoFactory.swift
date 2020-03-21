@@ -10,7 +10,24 @@ import UIKit
 
 class PhotoFactory: NSObject {
     
-    func getAllPhoto(ObjectArry:Array<Any>) -> Dictionary<Int, Array<Photo>> {
+    var objectArray:Array<Any>;
+    var albumeDic:Dictionary<Int, Array<Photo>>{
+        get{
+            return getAllAlbum(ObjectArry: objectArray)
+        }
+    }
+    var allPhotoArray:Array<Photo>{
+        get{
+            return getAllPhoto(albumDic: albumeDic);
+        }
+    }
+    
+    init(objectArray:Array<Any>) {
+        self.objectArray = objectArray;
+        super.init();
+    }
+    
+    private func getAllAlbum(ObjectArry:Array<Any>) -> Dictionary<Int, Array<Photo>> {
         
         var albumDic:Dictionary = Dictionary<Int, Array<Photo>>();
         
@@ -24,7 +41,6 @@ class PhotoFactory: NSObject {
                 let thumbnailUrl:String = dic["thumbnailUrl"] as! String;
                 
                 let photo:Photo = Photo(id: id, albumId: albumId, title: title, url: url, thumbnailUrl: thumbnailUrl);
-                
                 var photoArray:Array<Photo> = albumDic[albumId] ?? Array();
                 photoArray.append(photo);
                 
@@ -35,7 +51,7 @@ class PhotoFactory: NSObject {
         return albumDic;
     }
     
-    func getAllPhotoArray(albumDic:Dictionary<Int, Array<Photo>>) -> Array<Photo> {
+    private func getAllPhoto(albumDic:Dictionary<Int, Array<Photo>>) -> Array<Photo> {
         
         var allPhotoArray:Array<Photo> = Array();
         

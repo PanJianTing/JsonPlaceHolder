@@ -51,6 +51,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		553E3CA42425FEFA002DCD81 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				5578A4BA2423C35C0068D292 /* ViewController.swift */,
+				558A1DB02424F19E008B6ECE /* ShowAlbumViewController.swift */,
+				558A1DB224251186008B6ECE /* ShowPhotoViewController.swift */,
+				553F8B292425A31C0072E20A /* PhotoDetailViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		553E3CA52425FF21002DCD81 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				558A1DB4242514E8008B6ECE /* PhotoCollectionViewCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
 		5578A4AC2423C35C0068D292 = {
 			isa = PBXGroup;
 			children = (
@@ -71,17 +90,14 @@
 			isa = PBXGroup;
 			children = (
 				558B2A4A2425E47E00907438 /* API */,
+				553E3CA52425FF21002DCD81 /* Cell */,
 				558B2A412425E2BA00907438 /* Model */,
+				553E3CA42425FEFA002DCD81 /* ViewController */,
 				5578A4B82423C35C0068D292 /* AppDelegate.swift */,
-				5578A4BA2423C35C0068D292 /* ViewController.swift */,
-				558A1DB02424F19E008B6ECE /* ShowAlbumViewController.swift */,
-				558A1DB224251186008B6ECE /* ShowPhotoViewController.swift */,
-				553F8B292425A31C0072E20A /* PhotoDetailViewController.swift */,
-				558A1DB4242514E8008B6ECE /* PhotoCollectionViewCell.swift */,
-				5578A4BC2423C35C0068D292 /* Main.storyboard */,
 				5578A4BF2423C3650068D292 /* Assets.xcassets */,
-				5578A4C12423C3650068D292 /* LaunchScreen.storyboard */,
 				5578A4C42423C3650068D292 /* Info.plist */,
+				5578A4C12423C3650068D292 /* LaunchScreen.storyboard */,
+				5578A4BC2423C35C0068D292 /* Main.storyboard */,
 			);
 			path = JsonPlaceHolder;
 			sourceTree = "<group>";

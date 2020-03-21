@@ -16,7 +16,7 @@ class ShowAlbumViewController: UIViewController, UITableViewDelegate, UITableVie
     var navigationBarHeight : CGFloat!
     
     let api:JsonPlaceHolderAPI! = JsonPlaceHolderAPI();
-    let photoFactory = PhotoFactory();
+    var photoFactory:PhotoFactory!
     var photoData:Dictionary<Int, Array<Photo>>!;
     
 
@@ -25,9 +25,11 @@ class ShowAlbumViewController: UIViewController, UITableViewDelegate, UITableVie
         self.fullScreenSize = self.view.frame.size;
         self.navigationBarHeight = self.navigationController?.navigationBar.frame.size.height ?? 64;
         self.setTableView();
+        self.title = "相簿";
         api.getPhotos { (data) in
             let objectArray:Array = data as! Array<Any>;
-            self.photoData = self.photoFactory.getAllPhoto(ObjectArry: objectArray);
+            self.photoFactory = PhotoFactory(objectArray: objectArray);
+            self.photoData = self.photoFactory.albumeDic;
             DispatchQueue.main.async {
                 self.albumTableView.reloadData();
             }
@@ -80,7 +82,7 @@ class ShowAlbumViewController: UIViewController, UITableViewDelegate, UITableVie
         tableView.deselectRow(at: indexPath, animated: true);
         
         guard let photos:Array<Photo> = self.photoData[indexPath.row] else {
-            let nextViewController = ShowPhotoViewController(photo: self.photoFactory.getAllPhotoArray(albumDic: self.photoData));
+            let nextViewController = ShowPhotoViewController(photo: self.photoFactory.allPhotoArray);
             self.navigationController?.pushViewController(nextViewController, animated: true);
             return;
         }

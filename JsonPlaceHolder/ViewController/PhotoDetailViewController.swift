@@ -33,18 +33,21 @@ class PhotoDetailViewController: UIViewController {
         super.viewDidLoad();
         self.view.backgroundColor = UIColor.white;
         self.fullScreenSize = self.view.frame.size;
-        self.navigationBarHeight = self.navigationController?.navigationBar.frame.size.height ?? 64;
+        self.navigationBarHeight = UIApplication.shared.statusBarFrame.height +  (self.navigationController?.navigationBar.frame.size.height ?? 64);
         self.setImageView();
         self.setIdLabel();
         self.setTitieLabel();
-        
+        self.title = "詳細"
 
         // Do any additional setup after loading the view.
     }
     
     private func setImageView(){
-        self.imageView = UIImageView(frame: CGRect(x: 0, y: self.navigationBarHeight, width: self.fullScreenSize.width, height: self.fullScreenSize.height/2))
-        self.imageView.backgroundColor = UIColor.red;
+        self.imageView = UIImageView(frame: CGRect(x: 0, y: self.navigationBarHeight, width: self.fullScreenSize.width, height: self.fullScreenSize.width))
+        self.imageView.image = UIImage(named: "default_image");
+        self.imageView.backgroundColor = UIColor.white;
+        self.imageView.contentMode = .scaleAspectFit;
+    
         
         self.photo.getImage { (img) in
             DispatchQueue.main.async {
@@ -56,7 +59,7 @@ class PhotoDetailViewController: UIViewController {
     }
     
     private func setIdLabel(){
-        self.idLable = UILabel(frame: CGRect(x: 20, y: self.fullScreenSize.height/2+50, width: self.fullScreenSize.width, height: 40))
+        self.idLable = UILabel(frame: CGRect(x: 20, y:self.navigationBarHeight + self.fullScreenSize.width+10, width: self.fullScreenSize.width, height: 40))
 //        self.idLable.backgroundColor = UIColor.red;
          self.idLable.textColor = UIColor.black;
         self.idLable.text = "id : \(self.photo.id)"
@@ -66,7 +69,7 @@ class PhotoDetailViewController: UIViewController {
     
     private func setTitieLabel(){
         
-        self.titleLabel = UILabel(frame: CGRect(x: 20, y: self.fullScreenSize.height/2+100, width: self.fullScreenSize.width-10, height: 100))
+        self.titleLabel = UILabel(frame: CGRect(x: 20, y:self.navigationBarHeight + self.fullScreenSize.width+60, width: self.fullScreenSize.width-10, height: 100))
 //        self.titleLabel.backgroundColor = UIColor.blue;
         self.titleLabel.textColor = UIColor.black;
         self.titleLabel.text = "Title : \(self.photo.title)"

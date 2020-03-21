@@ -22,6 +22,7 @@ class Photo: NSObject {
         self.title = title;
         self.url = url;
         self.thumbnailUrl = thumbnailUrl;
+        super.init();
     }
     
     func getImage(completion:@escaping (UIImage) -> Void) {
@@ -32,56 +33,40 @@ class Photo: NSObject {
         let imageFileUrl = tempDirectory.appendingPathComponent(url.lastPathComponent);
         
         if FileManager.default.fileExists(atPath: imageFileUrl.path) {
+            print("Image Get File")
             let image = UIImage(contentsOfFile: imageFileUrl.path)!;
-//            guard let image = UIImage(contentsOfFile: imageFileUrl.path) else {
-//                completion(nil);
-//            }
-           completion(image)
+            completion(image)
         } else {
-           
-           let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
-              if let data = data, let image = UIImage(data: data) {
-                 try? data.write(to: imageFileUrl)
-                completion(image);
-                
-                
-//                 DispatchQueue.main.async {
-//                    self.imageView.image = image
-//                 }
-              }
-           }
-           task.resume()
+            print("Image Get Network")
+            let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
+                if let data = data, let image = UIImage(data: data) {
+                    try? data.write(to: imageFileUrl)
+                    completion(image);
+                }
+            }
+            task.resume()
         }
     }
     
     func getThumbnailImage(completion:@escaping (UIImage) -> Void) {
-            let url = URL(string: self.thumbnailUrl)!;
-            
-            let tempDirectory = FileManager.default.temporaryDirectory;
-            
-            let imageFileUrl = tempDirectory.appendingPathComponent("150/"+url.lastPathComponent);
-            print(imageFileUrl.path)
-            if FileManager.default.fileExists(atPath: imageFileUrl.path) {
-                let image = UIImage(contentsOfFile: imageFileUrl.path)!;
-    //            guard let image = UIImage(contentsOfFile: imageFileUrl.path) else {
-    //                completion(nil);
-    //            }
-               completion(image)
-            } else {
-               
-               let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
-                  if let data = data, let image = UIImage(data: data) {
-                     try? data.write(to: imageFileUrl)
+        let url = URL(string: self.thumbnailUrl)!;
+        
+        let tempDirectory = FileManager.default.temporaryDirectory;
+        
+        let imageFileUrl = tempDirectory.appendingPathComponent(url.lastPathComponent+"_150");
+        if FileManager.default.fileExists(atPath: imageFileUrl.path) {
+            print("Thumbnail Get File")
+            let image = UIImage(contentsOfFile: imageFileUrl.path)!;
+            completion(image)
+        } else {
+            print("Thumbnail Get Network")
+            let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
+                if let data = data, let image = UIImage(data: data) {
+                    try? data.write(to: imageFileUrl)
                     completion(image);
-                    
-                    
-//                     DispatchQueue.main.async {
-//                        self.imageView.image = image
-//                     }
-                  }
-               }
-               task.resume()
+                }
             }
+            task.resume()
         }
-
+    }
 }
