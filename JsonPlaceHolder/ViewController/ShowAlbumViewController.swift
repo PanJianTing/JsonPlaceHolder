@@ -37,7 +37,7 @@ class ShowAlbumViewController: UIViewController, UITableViewDelegate, UITableVie
         }
     }
     
-    
+    // MARK:Set View Component
     private func setTableView(){
         self.albumTableView = UITableView(frame: CGRect(x: 0, y: self.navigationBarHeight, width: self.fullScreenSize.width, height: self.fullScreenSize.height));
         

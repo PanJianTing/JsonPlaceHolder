@@ -42,6 +42,7 @@ class PhotoDetailViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+    // MARK : Set View Component
     private func setImageView(){
         self.imageView = UIImageView(frame: CGRect(x: 0, y: self.navigationBarHeight, width: self.fullScreenSize.width, height: self.fullScreenSize.width))
         self.imageView.image = UIImage(named: "default_image");

@@ -24,11 +24,15 @@ class ViewController: UIViewController {
         self.title = "Json Place Holder";
     }
     
+    // MARK:Button Action
+    
     @objc func clickButton() {
 
         self.navigationController?.pushViewController(ShowAlbumViewController(), animated: true)
     }
     
+    
+    // MARK:Setting View Component
     private func setButton(){
         self.albumButton =  UIButton(frame: CGRect(x: 0, y: 0, width: 100, height: 30));
         self.albumButton.setTitle("相簿", for: .normal)

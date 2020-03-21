@@ -39,6 +39,7 @@ class ShowPhotoViewController: UIViewController, UICollectionViewDelegate, UICol
         print(self.photoArray.count);
     }
     
+    // MARK : Set View Component
     private func setCollectionViewLayout() -> UICollectionViewFlowLayout{
         let layout = UICollectionViewFlowLayout();
         

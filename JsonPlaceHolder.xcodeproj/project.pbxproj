@@ -89,7 +89,7 @@
 		5578A4B72423C35C0068D292 /* JsonPlaceHolder */ = {
 			isa = PBXGroup;
 			children = (
-				558B2A4A2425E47E00907438 /* API */,
+				558B2A4A2425E47E00907438 /* Connection */,
 				553E3CA52425FF21002DCD81 /* Cell */,
 				558B2A412425E2BA00907438 /* Model */,
 				553E3CA42425FEFA002DCD81 /* ViewController */,
@@ -111,13 +111,13 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		558B2A4A2425E47E00907438 /* API */ = {
+		558B2A4A2425E47E00907438 /* Connection */ = {
 			isa = PBXGroup;
 			children = (
 				558B2A452425E2E200907438 /* JsonPlaceHolderAPI.swift */,
 				558B2A442425E2E200907438 /* UrlConnection.swift */,
 			);
-			path = API;
+			path = Connection;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
