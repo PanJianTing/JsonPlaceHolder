@@ -11,10 +11,15 @@ import UIKit
 class ShowPhotoViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
 
     var photoCollectionView : UICollectionView!
-    var fullScreenSize : CGSize!
-    var navigationBarHeight : CGFloat!
-    
     var photoArray:Array<Photo>
+    
+    var fullScreenSize : CGSize! {
+        return self.view.frame.size;
+        
+    }
+    var navigationBarHeight : CGFloat! {
+        return UIApplication.shared.statusBarFrame.height + (self.navigationController?.navigationBar.frame.size.height ?? 64);
+    }
     
     init(photo:Array<Photo>) {
         self.photoArray = photo;
@@ -30,8 +35,6 @@ class ShowPhotoViewController: UIViewController, UICollectionViewDelegate, UICol
         
         // Do any additional setup after loading the view.
         
-        self.fullScreenSize = self.view.frame.size;
-        self.navigationBarHeight = self.navigationController?.navigationBar.frame.size.height ?? 64;
         let layout = self.setCollectionViewLayout();
         self.setCollectionView(layout: layout);
         self.title = "照片"

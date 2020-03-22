@@ -14,8 +14,14 @@ class PhotoDetailViewController: UIViewController {
     var idLable : UILabel!;
     var titleLabel : UILabel!;
     
-    var fullScreenSize : CGSize!
-    var navigationBarHeight : CGFloat!
+    var fullScreenSize : CGSize! {
+        return self.view.frame.size;
+        
+    }
+    var navigationBarHeight : CGFloat! {
+        return UIApplication.shared.statusBarFrame.height + (self.navigationController?.navigationBar.frame.size.height ?? 64);
+    }
+    
     
     var photo:Photo
     
@@ -32,8 +38,6 @@ class PhotoDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad();
         self.view.backgroundColor = UIColor.white;
-        self.fullScreenSize = self.view.frame.size;
-        self.navigationBarHeight = UIApplication.shared.statusBarFrame.height +  (self.navigationController?.navigationBar.frame.size.height ?? 64);
         self.setImageView();
         self.setIdLabel();
         self.setTitieLabel();

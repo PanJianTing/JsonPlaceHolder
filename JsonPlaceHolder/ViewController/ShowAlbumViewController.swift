@@ -12,18 +12,21 @@ import UIKit
 class ShowAlbumViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     var albumTableView : UITableView!
-    var fullScreenSize : CGSize!
-    var navigationBarHeight : CGFloat!
     
     let api:JsonPlaceHolderAPI! = JsonPlaceHolderAPI();
     var photoFactory:PhotoFactory!
     var photoData:Dictionary<Int, Array<Photo>>!;
     
+    var fullScreenSize : CGSize! {
+        return self.view.frame.size;
+        
+    }
+    var navigationBarHeight : CGFloat! {
+        return UIApplication.shared.statusBarFrame.height + (self.navigationController?.navigationBar.frame.size.height ?? 64);
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.fullScreenSize = self.view.frame.size;
-        self.navigationBarHeight = self.navigationController?.navigationBar.frame.size.height ?? 64;
         self.setTableView();
         self.title = "相簿";
         api.getPhotos { (data) in
