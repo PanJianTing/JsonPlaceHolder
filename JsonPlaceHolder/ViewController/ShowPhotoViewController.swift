@@ -82,6 +82,7 @@ class ShowPhotoViewController: UIViewController, UICollectionViewDelegate, UICol
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PhotoCell", for: indexPath) as! PhotoCollectionViewCell;
+        
         let photo = self.photoArray[indexPath.row];
         
         cell.titleLabel.text = "\(photo.id)"
