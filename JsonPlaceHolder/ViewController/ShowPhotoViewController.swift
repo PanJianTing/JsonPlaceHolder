@@ -59,14 +59,12 @@ class ShowPhotoViewController: UIViewController, UICollectionViewDelegate, UICol
     }
     
     private func setCollectionView(layout:UICollectionViewFlowLayout){
-        self.photoCollectionView = UICollectionView(frame: CGRect(x: 0, y: self.navigationBarHeight, width: self.fullScreenSize.width, height: self.fullScreenSize.height),collectionViewLayout: layout);
+        self.photoCollectionView = UICollectionView(frame: CGRect(x: 0, y: self.navigationBarHeight, width: self.fullScreenSize.width, height: self.fullScreenSize.height-self.navigationBarHeight),collectionViewLayout: layout);
         
         self.photoCollectionView.register(PhotoCollectionViewCell.self, forCellWithReuseIdentifier: "PhotoCell");
         
         self.photoCollectionView.delegate = self;
         self.photoCollectionView.dataSource = self;
-        
-        self.photoCollectionView.frame = CGRect(x: 0, y: self.navigationBarHeight, width: self.fullScreenSize.width, height: self.fullScreenSize.height);
         
         self.view.addSubview(self.photoCollectionView);
         
