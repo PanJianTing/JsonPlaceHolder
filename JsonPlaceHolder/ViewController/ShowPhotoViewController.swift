@@ -85,10 +85,18 @@ class ShowPhotoViewController: UIViewController, UICollectionViewDelegate, UICol
         
         cell.titleLabel.text = "\(photo.id)"
         cell.detailLabel.text = photo.title;
-        
-        photo.getThumbnailImage { (img) in
+        cell.id = URL(string: photo.thumbnailUrl)?.lastPathComponent;
+        cell.imageView.image = UIImage(named: "default_image");
+
+        photo.getThumbnailImage { (downloadId, img) in
             DispatchQueue.main.async {
-                cell.imageView.image = img;
+
+                if let id = cell.id{
+                    if downloadId == id{
+                        cell.imageView.image = img;
+                    }
+
+                }
             }
         }
 //        cell.backgroundColor = UIColor.red;

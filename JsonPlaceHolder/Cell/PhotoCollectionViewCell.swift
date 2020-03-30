@@ -10,6 +10,7 @@ import UIKit
 
 class PhotoCollectionViewCell: UICollectionViewCell {
     
+    var id : String?
     var imageView : UIImageView!;
     var titleLabel : UILabel!;
     var detailLabel : UILabel!;

@@ -48,8 +48,9 @@ class Photo: NSObject {
         }
     }
     
-    func getThumbnailImage(completion:@escaping (UIImage) -> Void) {
+    func getThumbnailImage(completion:@escaping (String, UIImage) -> Void) {
         let url = URL(string: self.thumbnailUrl)!;
+        let id = url.lastPathComponent;
         
         let tempDirectory = FileManager.default.temporaryDirectory;
         
@@ -57,13 +58,13 @@ class Photo: NSObject {
         if FileManager.default.fileExists(atPath: imageFileUrl.path) {
             print("Thumbnail Get File")
             let image = UIImage(contentsOfFile: imageFileUrl.path)!;
-            completion(image)
+            completion(id, image)
         } else {
             print("Thumbnail Get Network")
             let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
                 if let data = data, let image = UIImage(data: data) {
                     try? data.write(to: imageFileUrl)
-                    completion(image);
+                    completion(id, image);
                 }
             }
             task.resume()
