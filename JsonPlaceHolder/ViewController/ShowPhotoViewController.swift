@@ -8,10 +8,10 @@
 
 import UIKit
 
-class ShowPhotoViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
+class ShowPhotoViewController: UIViewController {
 
     var photoCollectionView : UICollectionView!
-    var photoArray:Array<Photo>
+//    var photoArray:Array<Photo>
     
     var fullScreenSize : CGSize! {
         return self.view.frame.size;
@@ -21,14 +21,10 @@ class ShowPhotoViewController: UIViewController, UICollectionViewDelegate, UICol
         return UIApplication.shared.statusBarFrame.height + (self.navigationController?.navigationBar.frame.size.height ?? 64);
     }
     
-    init(photo:Array<Photo>) {
-        self.photoArray = photo;
-        super.init(nibName: nil, bundle: nil);
-    }
+    var photos:[Photo]?;
+    var viewModel: PhotoViewModel?
+    var dataSource = PhotoDataSource();
     
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,7 +35,28 @@ class ShowPhotoViewController: UIViewController, UICollectionViewDelegate, UICol
         self.setCollectionView(layout: layout);
         self.title = "照片"
         
-        print(self.photoArray.count);
+        self.viewModel = PhotoViewModel(dataSource: self.dataSource, photos: self.photos);
+        
+        
+        self.viewModel?.onErrorHandler = { errorStr in
+            print(errorStr as Any);
+        }
+        
+        self.viewModel?.onPhotoClick = { photo in
+            guard let photo = photo else {
+                return
+            }
+            let photoDetailViewController = PhotoDetailViewController(photo: photo);
+            self.navigationController?.pushViewController(photoDetailViewController, animated: true);
+        }
+        
+        self.dataSource.viewModel = self.viewModel
+        
+        self.dataSource.data.addAndNotify(self) { [weak self] _  in
+            self?.photoCollectionView.reloadData();
+        }
+        self.viewModel?.getAllPhoto();
+
     }
     
     // MARK : Set View Component
@@ -63,53 +80,11 @@ class ShowPhotoViewController: UIViewController, UICollectionViewDelegate, UICol
         
         self.photoCollectionView.register(PhotoCollectionViewCell.self, forCellWithReuseIdentifier: "PhotoCell");
         
-        self.photoCollectionView.delegate = self;
-        self.photoCollectionView.dataSource = self;
+        self.photoCollectionView.delegate = self.dataSource;
+        self.photoCollectionView.dataSource = self.dataSource;
         
         self.view.addSubview(self.photoCollectionView);
         
     }
     
-    
-    //MARK: Collection View Delegate
-
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return photoArray.count;
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PhotoCell", for: indexPath) as! PhotoCollectionViewCell;
-        
-        let photo = self.photoArray[indexPath.row];
-        
-        cell.titleLabel.text = "\(photo.id)"
-        cell.detailLabel.text = photo.title;
-        cell.id = URL(string: photo.thumbnailUrl)?.lastPathComponent;
-        cell.imageView.image = UIImage(named: "default_image");
-
-        photo.getThumbnailImage { (downloadId, img) in
-            DispatchQueue.main.async {
-
-                if let id = cell.id{
-                    if downloadId == id{
-                        cell.imageView.image = img;
-                    }
-
-                }
-            }
-        }
-//        cell.backgroundColor = UIColor.red;
-        
-        return cell;
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
-        let photo = self.photoArray[indexPath.row];
-        
-        let photoDetailViewController = PhotoDetailViewController(photo: photo);
-        self.navigationController?.pushViewController(photoDetailViewController, animated: true);
-    }
-
 }

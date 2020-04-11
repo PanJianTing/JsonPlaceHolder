@@ -10,10 +10,10 @@ import UIKit
 
 class PhotoFactory: NSObject {
     
-    var objectArray:Array<Any>;
+    var objectArray:[Photo];
     var albumeDic:Dictionary<Int, Array<Photo>>{
         get{
-            return getAllAlbum(ObjectArry: objectArray)
+            return getAllAlbum(photos: objectArray)
         }
     }
     var allPhotoArray:Array<Photo>{
@@ -22,30 +22,19 @@ class PhotoFactory: NSObject {
         }
     }
     
-    init(objectArray:Array<Any>) {
+    init(objectArray:[Photo]) {
         self.objectArray = objectArray;
         super.init();
     }
     
-    private func getAllAlbum(ObjectArry:Array<Any>) -> Dictionary<Int, Array<Photo>> {
+    private func getAllAlbum(photos:[Photo]) -> Dictionary<Int, Array<Photo>> {
         
         var albumDic:Dictionary = Dictionary<Int, Array<Photo>>();
         
-        for object in ObjectArry {
-            if object is Dictionary<String, Any>{
-                let dic:Dictionary<String, Any> = object as! Dictionary;
-                let id:Int = dic["id"] as! Int;
-                let albumId:Int = dic["albumId"] as! Int;
-                let title:String = dic["title"] as! String;
-                let url:String = dic["url"] as! String;
-                let thumbnailUrl:String = dic["thumbnailUrl"] as! String;
-                
-                let photo:Photo = Photo(id: id, albumId: albumId, title: title, url: url, thumbnailUrl: thumbnailUrl);
-                var photoArray:Array<Photo> = albumDic[albumId] ?? Array();
-                photoArray.append(photo);
-                
-                albumDic[albumId] = photoArray;
-            }
+        for photo in photos {
+            var photoArray:Array<Photo> = albumDic[photo.albumId] ?? Array();
+            photoArray.append(photo);
+            albumDic[photo.albumId] = photoArray;
         }
         
         return albumDic;

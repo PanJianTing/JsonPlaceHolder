@@ -8,7 +8,11 @@
 
 import UIKit
 
-class Photo: NSObject {
+class photoArray: Codable {
+
+}
+
+class Photo: Codable {
     
     let id : Int;
     let albumId : Int;
@@ -22,7 +26,7 @@ class Photo: NSObject {
         self.title = title;
         self.url = url;
         self.thumbnailUrl = thumbnailUrl;
-        super.init();
+//        super.init();
     }
     
     func getImage(completion:@escaping (UIImage) -> Void) {

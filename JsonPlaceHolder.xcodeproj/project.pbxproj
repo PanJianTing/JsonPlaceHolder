@@ -8,6 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		553F8B2A2425A31C0072E20A /* PhotoDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553F8B292425A31C0072E20A /* PhotoDetailViewController.swift */; };
+		5566A01124419ED200111491 /* DynamicValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5566A01024419ED200111491 /* DynamicValue.swift */; };
+		5566A0142441A1C600111491 /* GenericDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5566A0132441A1C600111491 /* GenericDataSource.swift */; };
+		5566A0162441A3C300111491 /* AlbumDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5566A0152441A3C300111491 /* AlbumDataSource.swift */; };
+		5566A0182441A54400111491 /* PhotoDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5566A0172441A54400111491 /* PhotoDataSource.swift */; };
+		5566A01B2441A62300111491 /* PhotoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5566A01A2441A62300111491 /* PhotoViewModel.swift */; };
+		5566A01D2441B06500111491 /* AlbumViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5566A01C2441B06500111491 /* AlbumViewModel.swift */; };
 		5578A4B92423C35C0068D292 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5578A4B82423C35C0068D292 /* AppDelegate.swift */; };
 		5578A4BB2423C35C0068D292 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5578A4BA2423C35C0068D292 /* ViewController.swift */; };
 		5578A4BE2423C35C0068D292 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5578A4BC2423C35C0068D292 /* Main.storyboard */; };
@@ -24,6 +30,12 @@
 
 /* Begin PBXFileReference section */
 		553F8B292425A31C0072E20A /* PhotoDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoDetailViewController.swift; sourceTree = "<group>"; };
+		5566A01024419ED200111491 /* DynamicValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicValue.swift; sourceTree = "<group>"; };
+		5566A0132441A1C600111491 /* GenericDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericDataSource.swift; sourceTree = "<group>"; };
+		5566A0152441A3C300111491 /* AlbumDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumDataSource.swift; sourceTree = "<group>"; };
+		5566A0172441A54400111491 /* PhotoDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoDataSource.swift; sourceTree = "<group>"; };
+		5566A01A2441A62300111491 /* PhotoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoViewModel.swift; sourceTree = "<group>"; };
+		5566A01C2441B06500111491 /* AlbumViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumViewModel.swift; sourceTree = "<group>"; };
 		5578A4B52423C35C0068D292 /* JsonPlaceHolder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JsonPlaceHolder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5578A4B82423C35C0068D292 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5578A4BA2423C35C0068D292 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -70,6 +82,25 @@
 			path = Cell;
 			sourceTree = "<group>";
 		};
+		5566A0122441A1A800111491 /* DataSource */ = {
+			isa = PBXGroup;
+			children = (
+				5566A0132441A1C600111491 /* GenericDataSource.swift */,
+				5566A0152441A3C300111491 /* AlbumDataSource.swift */,
+				5566A0172441A54400111491 /* PhotoDataSource.swift */,
+			);
+			path = DataSource;
+			sourceTree = "<group>";
+		};
+		5566A0192441A60E00111491 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				5566A01A2441A62300111491 /* PhotoViewModel.swift */,
+				5566A01C2441B06500111491 /* AlbumViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		5578A4AC2423C35C0068D292 = {
 			isa = PBXGroup;
 			children = (
@@ -89,9 +120,11 @@
 		5578A4B72423C35C0068D292 /* JsonPlaceHolder */ = {
 			isa = PBXGroup;
 			children = (
+				5566A0122441A1A800111491 /* DataSource */,
 				558B2A4A2425E47E00907438 /* Connection */,
 				553E3CA52425FF21002DCD81 /* Cell */,
 				558B2A412425E2BA00907438 /* Model */,
+				5566A0192441A60E00111491 /* ViewModel */,
 				553E3CA42425FEFA002DCD81 /* ViewController */,
 				5578A4B82423C35C0068D292 /* AppDelegate.swift */,
 				5578A4BF2423C3650068D292 /* Assets.xcassets */,
@@ -107,6 +140,7 @@
 			children = (
 				558B2A422425E2E200907438 /* Photo.swift */,
 				558B2A432425E2E200907438 /* PhotoFactory.swift */,
+				5566A01024419ED200111491 /* DynamicValue.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -192,6 +226,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				558B2A462425E2E200907438 /* Photo.swift in Sources */,
+				5566A0182441A54400111491 /* PhotoDataSource.swift in Sources */,
+				5566A01124419ED200111491 /* DynamicValue.swift in Sources */,
+				5566A0142441A1C600111491 /* GenericDataSource.swift in Sources */,
+				5566A01B2441A62300111491 /* PhotoViewModel.swift in Sources */,
 				553F8B2A2425A31C0072E20A /* PhotoDetailViewController.swift in Sources */,
 				5578A4BB2423C35C0068D292 /* ViewController.swift in Sources */,
 				558A1DB5242514E8008B6ECE /* PhotoCollectionViewCell.swift in Sources */,
@@ -199,7 +237,9 @@
 				558A1DB12424F19E008B6ECE /* ShowAlbumViewController.swift in Sources */,
 				558A1DB324251186008B6ECE /* ShowPhotoViewController.swift in Sources */,
 				5578A4B92423C35C0068D292 /* AppDelegate.swift in Sources */,
+				5566A01D2441B06500111491 /* AlbumViewModel.swift in Sources */,
 				558B2A492425E2E200907438 /* JsonPlaceHolderAPI.swift in Sources */,
+				5566A0162441A3C300111491 /* AlbumDataSource.swift in Sources */,
 				558B2A472425E2E200907438 /* PhotoFactory.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
